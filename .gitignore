@@ -1,0 +1,5 @@
+lazy-lock.json
+.nvim/
+.data/
+*.swp
+.DS_Store
