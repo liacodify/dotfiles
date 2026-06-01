@@ -37,13 +37,28 @@ mkdir -p "$ZSH_CUSTOM/plugins"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 
 echo ""
-echo "[5/8] Instalando Tmux..."
+echo "[5/8] Instalando Tmux y plugins..."
 if ! command -v tmux &> /dev/null; then
     sudo apt install -y tmux
 fi
 mkdir -p "$HOME/.tmux/plugins"
-[ ! -d "$HOME/.tmux/plugins/tpm" ] && \
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
     git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+fi
+
+if [ ! -f "$HOME/.tmux/plugins/tpm/scripts/install_plugins.sh" ]; then
+    echo "TPM no encontrado, intentando reinstall..."
+    rm -rf "$HOME/.tmux/plugins/tpm"
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+fi
+
+if [ -f "$HOME/.tmux/plugins/tpm/scripts/install_plugins.sh" ]; then
+    echo "Instalando plugins de tmux (puede tardar)..."
+    bash "$HOME/.tmux/plugins/tpm/scripts/install_plugins.sh"
+else
+    echo "ADVERTENCIA: TPM no se instaló correctamente"
+    echo "Después de ejecutar este script, abre tmux y presiona Ctrl+b luego I"
+fi
 
 echo ""
 echo "[6/8] Instalando NVM y Node LTS..."
