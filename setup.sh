@@ -67,12 +67,22 @@ mkdir -p "$HOME/.config/nvim/lua/config"
 mkdir -p "$HOME/.config/nvim/lua/plugins"
 
 echo ""
-echo "[8/8] Creando symlinks de configs..."
+echo "[8/9] Creando symlinks de configs y archivos LazyVim..."
+mkdir -p "$HOME/.config/nvim/lua/config"
+mkdir -p "$HOME/.config/nvim/lua/plugins"
+mkdir -p "$HOME/.local/bin"
+
 ln -sf "$DOTFILES_REPO/zsh/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES_REPO/tmux/.tmux.conf" "$HOME/.tmux.conf"
-ln -sf "$DOTFILES_REPO/nvim" "$HOME/.config/nvim"
+ln -sf "$DOTFILES_REPO/nvim/init.lua" "$HOME/.config/nvim/init.lua"
+ln -sf "$DOTFILES_REPO/nvim/lua/config/lazy.lua" "$HOME/.config/nvim/lua/config/lazy.lua"
+ln -sf "$DOTFILES_REPO/nvim/lua/config/options.lua" "$HOME/.config/nvim/lua/config/options.lua"
+ln -sf "$DOTFILES_REPO/nvim/lua/config/keymaps.lua" "$HOME/.config/nvim/lua/config/keymaps.lua"
+ln -sf "$DOTFILES_REPO/nvim/lua/config/autocmds.lua" "$HOME/.config/nvim/lua/config/autocmds.lua"
+ln -sf "$DOTFILES_REPO/nvim/lua/plugins/"*.lua "$HOME/.config/nvim/lua/plugins/"
+ln -sf "$DOTFILES_REPO/nvim/stylua.toml" "$HOME/.config/nvim/stylua.toml"
+ln -sf "$DOTFILES_REPO/nvim/lazyvim.json" "$HOME/.config/nvim/lazyvim.json"
 
-mkdir -p "$HOME/.local/bin"
 cat > "$HOME/.local/bin/env" << 'ENVEOF'
 #!/bin/sh
 case ":${PATH}:" in
@@ -86,10 +96,5 @@ ENVEOF
 chmod +x "$HOME/.local/bin/env"
 
 echo ""
-echo "=== Instalación completada ==="
-echo ""
-echo "PASOS FINALES:"
-echo "1. Cierra terminal y abre nueva (o ejecuta 'exec zsh')"
-echo "2. En tmux presiona Ctrl+b luego I para instalar plugins TPM"
-echo "3. Ejecuta 'nvim' y espera que LazyVim instale plugins"
-echo "4. Reinicia la terminal para cargar nvm"
+echo "[9/9] Cambiando shell por defecto a ZSH..."
+chsh -s "$(which zsh)"
