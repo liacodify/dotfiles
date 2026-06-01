@@ -98,6 +98,9 @@ mkdir -p "$HOME/.local/bin"
 
 ln -sf "$DOTFILES_REPO/zsh/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES_REPO/tmux/.tmux.conf" "$HOME/.tmux.conf"
+mkdir -p "$HOME/.config/tmux/scripts"
+cp -r "$DOTFILES_REPO/tmux/scripts/"* "$HOME/.config/tmux/scripts/" 2>/dev/null || true
+chmod +x "$HOME/.config/tmux/scripts/"*.sh 2>/dev/null || true
 ln -sf "$DOTFILES_REPO/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 ln -sf "$DOTFILES_REPO/nvim/lua/config/lazy.lua" "$HOME/.config/nvim/lua/config/lazy.lua"
 ln -sf "$DOTFILES_REPO/nvim/lua/config/options.lua" "$HOME/.config/nvim/lua/config/options.lua"
