@@ -56,9 +56,12 @@ nvm install --lts
 nvm use --lts
 
 echo ""
-echo "[7/8] Instalando Neovim..."
+echo "[7/8] Instalando Neovim (última versión)..."
 if ! command -v nvim &> /dev/null; then
-    sudo apt install -y neovim
+    curl -fsSL https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz -o /tmp/nvim.tar.gz
+    sudo tar -xzf /tmp/nvim.tar.gz -C /opt/
+    sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+    rm /tmp/nvim.tar.gz
 fi
 mkdir -p "$HOME/.config/nvim/lua/config"
 mkdir -p "$HOME/.config/nvim/lua/plugins"
