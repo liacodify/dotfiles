@@ -63,6 +63,7 @@ fi
 
 if [ -f "$HOME/.tmux/plugins/tpm/scripts/install_plugins.sh" ]; then
     echo "Instalando plugins de tmux (puede tardar)..."
+    export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/"
     bash "$HOME/.tmux/plugins/tpm/scripts/install_plugins.sh"
 else
     echo "ADVERTENCIA: TPM no se instaló correctamente"
